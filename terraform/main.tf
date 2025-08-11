@@ -12,3 +12,14 @@ module "eks" {
   vpc_id             = module.networking.vpc_id
   private_subnet_ids = module.networking.private_subnet
 }
+
+module "helm" {
+  source = "./modules/helm"
+  cert_manager_irsa_role_arn = module.irsa.cert_manager_irsa_role_arn
+  external_dns_irsa_role_arn = module.irsa.external_dns_irsa_role_arn
+}
+
+module "irsa" {
+  source = "./modules/irsa"
+  
+}

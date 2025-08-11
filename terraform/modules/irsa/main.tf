@@ -34,7 +34,7 @@ module "cert_manager" {
     oidc_providers = {
         eks = {
             provider_arn = aws_iam_openid_connect_provider.eks.arn
-            namespace_service_account = ["cert-manager-cert-manager"]
+            namespace_service_accounts = ["cert-manager:cert-manager"]
         }
     }  
 }
@@ -51,7 +51,7 @@ module "external_dns" {
     oidc_providers = {
         eks = {
             provider_arn = aws_iam_openid_connect_provider.eks.arn
-            namespace_service_account = ["external-dns:external-dns"]
+            namespace_service_accounts = ["external-dns:external-dns"]
         }
     }
   
@@ -66,3 +66,4 @@ output "external_dns" {
     value = module.external_dns.iam_role_arn
   
 }
+
