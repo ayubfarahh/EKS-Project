@@ -7,5 +7,5 @@ output "private_subnet" {
     aws_subnet.private_subnet1.id,
     aws_subnet.private_subnet2.id
   ]
-  
+
 }

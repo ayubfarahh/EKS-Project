@@ -74,7 +74,7 @@ resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.ngw.id
 
   }
@@ -82,13 +82,13 @@ resource "aws_route_table" "private_route_table" {
 }
 
 resource "aws_route_table_association" "rta_priv1" {
-    route_table_id = aws_route_table.private_route_table.id
-    subnet_id = aws_subnet.private_subnet1.id
-  
+  route_table_id = aws_route_table.private_route_table.id
+  subnet_id      = aws_subnet.private_subnet1.id
+
 }
 
 resource "aws_route_table_association" "rta_priv2" {
-    route_table_id = aws_route_table.private_route_table.id
-    subnet_id = aws_subnet.private_subnet2.id
-  
+  route_table_id = aws_route_table.private_route_table.id
+  subnet_id      = aws_subnet.private_subnet2.id
+
 }
