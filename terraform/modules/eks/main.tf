@@ -40,7 +40,7 @@ resource "aws_security_group_rule" "cluster_to_nodes" {
 resource "aws_eks_cluster" "eks_cluster" {
   name     = "eks-project"
   version  = "1.30"
-  role_arn = "arn:aws:iam::940622738555:role/eks-project-cluster-role"
+  role_arn = var.cluster_role_arn
 
   vpc_config {
     subnet_ids              = var.private_subnet_ids
@@ -53,7 +53,7 @@ resource "aws_eks_cluster" "eks_cluster" {
 resource "aws_eks_node_group" "eks_nodes" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = "workers"
-  node_role_arn   = "arn:aws:iam::940622738555:role/eks-project-node-role"
+  node_role_arn   = var.node_role_arn
   subnet_ids      = var.private_subnet_ids
 
   instance_types = ["t3.medium"]
