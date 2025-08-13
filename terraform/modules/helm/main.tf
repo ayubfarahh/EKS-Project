@@ -24,6 +24,7 @@ provider "helm" {
 }
 
 resource "helm_release" "ingress_nginx" {
+  depends_on = [var.depends_on_modules]
   name             = "ingress-nginx"
   repository       = "https://kubernetes.github.io/ingress-nginx"
   chart            = "ingress-nginx"
@@ -34,6 +35,7 @@ resource "helm_release" "ingress_nginx" {
 }
 
 resource "helm_release" "cert_manager" {
+  depends_on = [var.depends_on_modules]
   name             = "cert-manager"
   repository       = "https://charts.jetstack.io"
   chart            = "cert-manager"
@@ -54,6 +56,7 @@ resource "helm_release" "cert_manager" {
 }
 
 resource "helm_release" "external_dns" {
+  depends_on = [var.depends_on_modules]
   name             = "external-dns"
   repository       = "https://kubernetes-sigs.github.io/external-dns/"
   version          = "1.15.0"
@@ -75,4 +78,60 @@ resource "helm_release" "external_dns" {
     })
   ]
 }
+
+# resource "helm_release" "kube_prometheus_stack" {
+#   name             = "kube-prometheus-stack"
+#   repository       = "https://prometheus-community.github.io/helm-charts"
+#   chart            = "kube-prometheus-stack"
+#   version          = "56.6.0" 
+#   namespace        = "monitoring"
+#   create_namespace = true
+
+#   values = [
+#   file("${path.module}/../../helm-values/kube-prometheus-stack.yaml")
+# ]
+
+
+# }
+
+resource "helm_release" "argocd" {
+  name             = "argocd"
+  namespace        = "argocd"
+  create_namespace = true
+
+  repository = "oci://ghcr.io/argoproj/argo-helm"
+  chart      = "argo-cd"
+  version    = "6.7.18"
+
+  values = [file("${path.root}/kubernetes/argocd/values.yaml")]
+
+  # Force overrides to ensure ingress host is correct
+  set {
+    name  = "server.ingress.enabled"
+    value = "true"
+  }
+  set {
+    name  = "server.ingress.ingressClassName"
+    value = "nginx"
+  }
+  set {
+    name  = "server.ingress.hosts[0]"
+    value = "argocd.lab.ayubs.uk"
+  }
+  set {
+    name  = "server.ingress.tls[0].hosts[0]"
+    value = "argocd.lab.ayubs.uk"
+  }
+  set {
+    name  = "server.ingress.tls[0].secretName"
+    value = "argocd-tls"
+  }
+
+  set {
+  name  = "server.ingress.enabled"
+  value = "false"
+  }
+
+}
+
 

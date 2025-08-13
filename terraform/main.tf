@@ -16,13 +16,15 @@ module "eks" {
   node_role_arn = module.iam.node_role_arn
 }
 
-module "helm" {
-  source                     = "./modules/helm"
-  cert_manager_irsa_role_arn = module.irsa.cert_manager_irsa_role_arn
-  external_dns_irsa_role_arn = module.irsa.external_dns_irsa_role_arn
-}
-
 module "irsa" {
   source = "./modules/irsa"
+  depends_on = [module.eks]
 
+}
+
+module "helm" {
+  source                     = "./modules/helm"
+  depends_on_modules         = [module.irsa]
+  cert_manager_irsa_role_arn = module.irsa.cert_manager_irsa_role_arn
+  external_dns_irsa_role_arn = module.irsa.external_dns_irsa_role_arn
 }

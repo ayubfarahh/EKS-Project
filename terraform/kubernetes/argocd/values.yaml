@@ -1,0 +1,36 @@
+global:
+  image:
+    tag: v2.11.6
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      external-dns.alpha.kubernetes.io/hostname: argocd.lab.ayubs.uk
+    hosts:
+      - argocd.lab.ayubs.uk
+    tls:
+      - hosts: [argocd.lab.ayubs.uk]
+        secretName: argocd-tls
+  service:
+    type: ClusterIP
+  extraArgs:
+    - --insecure
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+controller:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+repoServer:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true

@@ -1,0 +1,17 @@
+grafana:
+  adminPassword: "admin123"
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      external-dns.alpha.kubernetes.io/hostname: grafana.lab.ayubs.uk
+    hosts:
+      - grafana.lab.ayubs.uk
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.lab.ayubs.uk
+

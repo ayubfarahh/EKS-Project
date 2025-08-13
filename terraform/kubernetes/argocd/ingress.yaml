@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    external-dns.alpha.kubernetes.io/hostname: argocd.lab.ayubs.uk
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: [argocd.lab.ayubs.uk]
+      secretName: argocd-tls
+  rules:
+    - host: argocd.lab.ayubs.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 80
