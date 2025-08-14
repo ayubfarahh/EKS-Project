@@ -1,5 +1,17 @@
 module "networking" {
   source = "./modules/networking"
+  vpc_cidr = var.vpc_cidr
+  public_subnet1_cidr = var.public_subnet1_cidr
+  public_subnet1_az = var.public_subnet1_az
+  map_public_ip_on_launch = var.map_public_ip_on_launch
+  public_subnet2_cidr = var.public_subnet2_cidr
+  public_subnet2_az = var.public_subnet2_az
+  private_subnet1_az = var.private_subnet1_az
+  private_subnet1_cidr = var.private_subnet1_cidr
+  private_subnet2_az = var.private_subnet2_az
+  private_subnet2_cidr = var.private_subnet2_cidr
+  igw_cidr = var.igw_cidr
+  eip_domain = var.eip_domain
 }
 
 module "iam" {
