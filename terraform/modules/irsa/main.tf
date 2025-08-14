@@ -7,7 +7,7 @@ data "aws_eks_cluster_auth" "token" {
 
 }
 
-# Get thumbprint for the OIDC issuer
+
 data "tls_certificate" "eks_oidc" {
   url = data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer
 

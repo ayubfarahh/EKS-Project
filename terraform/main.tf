@@ -26,6 +26,28 @@ module "eks" {
 
   cluster_role_arn = module.iam.cluster_role_arn
   node_role_arn = module.iam.node_role_arn
+  eks_cluster_sg_name = var.eks_cluster_sg_name
+  eks_cluster_sg_desc = var.eks_cluster_sg_desc
+  eks_nodes_sg_name = var.eks_nodes_sg_name
+  eks_nodes_sg_desc = var.eks_nodes_sg_desc
+  from_port = var.from_port
+  to_port = var.to_port
+  all_protocols = var.all_protocols
+  cidr_blocks = var.cidr_blocks
+  sg_rule_type = var.sg_rule_type
+  sg_rule_to_port = var.sg_rule_to_port
+  sg_rule_from_port = var.sg_rule_from_port
+  sg_rule_description = var.sg_rule_description
+  tcp_protocol = var.tcp_protocol
+  eks_cluster_name = var.eks_cluster_name
+  eks_cluster_version = var.eks_cluster_version
+  eks_node_name = var.eks_node_name
+  instance_types = var.instance_types
+  disk_size = var.disk_size
+  desired_size = var.desired_size
+  min_size = var.min_size
+  max_size = var.max_size
+
 }
 
 module "irsa" {
