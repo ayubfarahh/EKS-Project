@@ -1,27 +1,21 @@
-terraform {
-  required_providers {
-    helm = {
-      source  = "hashicorp/helm"
-      version = "~> 2.13"
-    }
-  }
-}
-
-
-data "aws_eks_cluster" "cluster" {
-  name = "eks-project"
-
-}
-data "aws_eks_cluster_auth" "token" {
-  name = data.aws_eks_cluster.cluster.name
-
+provider "kubernetes" {
+  host                   = var.eks_cluster_endpoint
+  cluster_ca_certificate = base64decode(var.eks_cluster_ca_data)
+  token                  = data.aws_eks_cluster_auth.cluster.token
 }
 
 provider "helm" {
   kubernetes {
-    config_path = pathexpand("~/.kube/config")
+    host                   = var.eks_cluster_endpoint
+    cluster_ca_certificate = base64decode(var.eks_cluster_ca_data)
+    token                  = data.aws_eks_cluster_auth.cluster.token
   }
 }
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = var.eks_cluster_name
+}
+
 
 resource "helm_release" "ingress_nginx" {
   depends_on = [var.depends_on_modules]
@@ -105,7 +99,6 @@ resource "helm_release" "argocd" {
 
   values = [file("${path.root}/kubernetes/argocd/values.yaml")]
 
-  # Force overrides to ensure ingress host is correct
   set {
     name  = "server.ingress.enabled"
     value = "true"

@@ -75,4 +75,8 @@ module "helm" {
   depends_on_modules         = [module.irsa]
   cert_manager_irsa_role_arn = module.irsa.cert_manager_irsa_role_arn
   external_dns_irsa_role_arn = module.irsa.external_dns_irsa_role_arn
+  eks_cluster_name = module.eks.eks_cluster_name
+  eks_cluster_endpoint     = module.eks.eks_cluster_endpoint
+  eks_cluster_ca_data      = module.eks.eks_cluster_certificate_authority
+  
 }

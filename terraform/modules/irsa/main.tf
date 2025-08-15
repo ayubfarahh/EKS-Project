@@ -21,10 +21,10 @@ resource "aws_iam_openid_connect_provider" "eks" {
 }
 
 module "cert_manager" {
-  source  = var.cert_manager_source
-  version = var.cert_manager_version
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "5.59.0"
 
-  role_name                  = var.cerq
+  role_name                  = var.cert_manager_role_name
   attach_cert_manager_policy = true
 
   cert_manager_hosted_zone_arns = var.cert_manager_hosted_zone_arns
@@ -38,8 +38,8 @@ module "cert_manager" {
 }
 
 module "external_dns" {
-  source  = var.external_dns_source
-  version = var.external_dns_version
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "5.59.0"
 
   role_name                  = var.external_dns_role_name
   attach_external_dns_policy = true

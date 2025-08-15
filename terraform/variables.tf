@@ -229,3 +229,8 @@ variable "external_dns_namespace" {
     type = list(string)
   
 }
+
+variable "depends_on_modules" {
+  type    = list(any)
+  default = []
+}
