@@ -8,16 +8,6 @@ variable "client_id_list" {
 
 }
 
-variable "cert_manager_source" {
-  type = string
-
-}
-
-variable "cert_manager_version" {
-  type = string
-
-}
-
 variable "cert_manager_role_name" {
   type = string
 
@@ -35,16 +25,6 @@ variable "cert_manager_hosted_zone_arns" {
 
 variable "cert_manager_namespace" {
   type = list(string)
-
-}
-
-variable "external_dns_source" {
-  type = string
-
-}
-
-variable "external_dns_version" {
-  type = string
 
 }
 

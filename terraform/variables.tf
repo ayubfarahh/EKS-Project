@@ -160,11 +160,6 @@ variable "max_size" {
 
 }
 
-variable "cluster_name" {
-  type = string
-
-}
-
 variable "client_id_list" {
   type = list(string)
 
@@ -230,7 +225,4 @@ variable "external_dns_namespace" {
 
 }
 
-variable "depends_on_modules" {
-  type    = list(any)
-  default = []
-}
+

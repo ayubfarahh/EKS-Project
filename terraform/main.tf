@@ -55,14 +55,10 @@ module "irsa" {
   depends_on                    = [module.eks]
   cluster_name                  = var.eks_cluster_name
   client_id_list                = var.client_id_list
-  cert_manager_source           = var.cert_manager_source
-  cert_manager_version          = var.cert_manager_version
   cert_manager_role_name        = var.cert_manager_role_name
   attach_cert_manager_policy    = var.attach_cert_manager_policy
   cert_manager_hosted_zone_arns = var.cert_manager_hosted_zone_arns
   cert_manager_namespace        = var.cert_manager_namespace
-  external_dns_source           = var.external_dns_source
-  external_dns_version          = var.external_dns_version
   external_dns_role_name        = var.external_dns_role_name
   attach_external_dns_policy    = var.attach_external_dns_policy
   external_dns_hosted_zone_arns = var.external_dns_hosted_zone_arns

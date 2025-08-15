@@ -35,7 +35,7 @@ module "cert_manager" {
   version = "5.59.0"
 
   role_name                  = var.cert_manager_role_name
-  attach_cert_manager_policy = true
+  attach_cert_manager_policy = var.attach_cert_manager_policy
 
   cert_manager_hosted_zone_arns = var.cert_manager_hosted_zone_arns
 
@@ -52,7 +52,7 @@ module "external_dns" {
   version = "5.59.0"
 
   role_name                  = var.external_dns_role_name
-  attach_external_dns_policy = true
+  attach_external_dns_policy = var.attach_external_dns_policy
 
   external_dns_hosted_zone_arns = var.external_dns_hosted_zone_arns
 
