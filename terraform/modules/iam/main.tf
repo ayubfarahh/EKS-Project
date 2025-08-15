@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 1.9.0, < 2.0.0"
-  }
+}
 
 resource "aws_iam_role" "eks_cluster" {
   name = "eks-project-cluster-role"

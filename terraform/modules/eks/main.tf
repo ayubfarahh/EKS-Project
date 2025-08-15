@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 1.9.0, < 2.0.0"
-  }
+}
 
 resource "aws_security_group" "eks_cluster_sg" {
   name        = var.eks_cluster_sg_name

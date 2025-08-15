@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 1.9.0, < 2.0.0"
-  }
+}
 
 data "aws_eks_cluster" "cluster" {
   name = var.cluster_name

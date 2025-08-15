@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 1.9.0, < 2.0.0"
-  }
+}
 
 resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr
