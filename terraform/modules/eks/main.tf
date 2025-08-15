@@ -2,6 +2,18 @@ terraform {
   required_version = ">= 1.9.0, < 2.0.0"
 }
 
+terraform {
+  required_version = ">= 1.9.0, < 2.0.0"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+
 resource "aws_security_group" "eks_cluster_sg" {
   name        = var.eks_cluster_sg_name
   description = var.eks_cluster_sg_desc
