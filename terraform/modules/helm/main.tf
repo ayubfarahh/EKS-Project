@@ -18,7 +18,7 @@ data "aws_eks_cluster_auth" "cluster" {
 
 
 resource "helm_release" "ingress_nginx" {
-  depends_on = [var.depends_on_modules]
+  depends_on       = [var.depends_on_modules]
   name             = "ingress-nginx"
   repository       = "https://kubernetes.github.io/ingress-nginx"
   chart            = "ingress-nginx"
@@ -29,7 +29,7 @@ resource "helm_release" "ingress_nginx" {
 }
 
 resource "helm_release" "cert_manager" {
-  depends_on = [var.depends_on_modules]
+  depends_on       = [var.depends_on_modules]
   name             = "cert-manager"
   repository       = "https://charts.jetstack.io"
   chart            = "cert-manager"
@@ -50,7 +50,7 @@ resource "helm_release" "cert_manager" {
 }
 
 resource "helm_release" "external_dns" {
-  depends_on = [var.depends_on_modules]
+  depends_on       = [var.depends_on_modules]
   name             = "external-dns"
   repository       = "https://kubernetes-sigs.github.io/external-dns/"
   version          = "1.15.0"
@@ -58,7 +58,7 @@ resource "helm_release" "external_dns" {
   namespace        = "external-dns"
   create_namespace = true
 
-   values = [
+  values = [
     yamlencode({
       provider   = "aws"
       policy     = "sync"
@@ -121,8 +121,8 @@ resource "helm_release" "argocd" {
   }
 
   set {
-  name  = "server.ingress.enabled"
-  value = "false"
+    name  = "server.ingress.enabled"
+    value = "false"
   }
 
 }

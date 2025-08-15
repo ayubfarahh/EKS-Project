@@ -11,10 +11,10 @@ resource "aws_security_group" "eks_nodes_sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = var.from_port
-    to_port     = var.to_port
-    protocol    = var.all_protocols
-    self        = true
+    from_port = var.from_port
+    to_port   = var.to_port
+    protocol  = var.all_protocols
+    self      = true
   }
 
   egress {
