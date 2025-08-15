@@ -49,7 +49,7 @@ jobs:
       uses: bridgecrewio/checkov-action@master
       with: 
         directory: ${{ env.TF_WORKING_DIR }}
-        framework: terraform
+        framework: terraforn
 
     - name: Terraform Init
       run: terraform init

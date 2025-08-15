@@ -31,7 +31,9 @@ resource "aws_iam_openid_connect_provider" "eks" {
 }
 
 module "cert_manager" {
-  source                     = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-role-for-service-accounts-eks?ref=v5.59.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "5.59.0"
+  
   role_name                  = var.cert_manager_role_name
   attach_cert_manager_policy = var.attach_cert_manager_policy
 
@@ -46,7 +48,9 @@ module "cert_manager" {
 }
 
 module "external_dns" {
-  source                     = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-role-for-service-accounts-eks?ref=v5.59.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "5.59.0"
+
   role_name                  = var.external_dns_role_name
   attach_external_dns_policy = var.attach_external_dns_policy
 
