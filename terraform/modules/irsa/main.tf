@@ -1,27 +1,22 @@
 terraform {
   required_version = ">= 1.9.0, < 2.0.0"
-}
-
-terraform {
-  required_version = ">= 1.9.0, < 2.0.0"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "~> 4.0"
+    }
   }
 }
+
 
 data "aws_eks_cluster" "cluster" {
   name = var.cluster_name
 }
-
-data "aws_eks_cluster_auth" "token" {
-  name = data.aws_eks_cluster.cluster.name
-
-}
-
 
 data "tls_certificate" "eks_oidc" {
   url = data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer
