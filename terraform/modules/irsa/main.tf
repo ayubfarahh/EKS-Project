@@ -16,6 +16,7 @@ terraform {
 
 data "aws_eks_cluster" "cluster" {
   name = var.cluster_name
+  tags = local.tags
 }
 
 data "tls_certificate" "eks_oidc" {
@@ -27,7 +28,7 @@ resource "aws_iam_openid_connect_provider" "eks" {
   url             = data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer
   client_id_list  = var.client_id_list
   thumbprint_list = [data.tls_certificate.eks_oidc.certificates[0].sha1_fingerprint]
-
+  tags = local.tags
 }
 
 module "cert_manager" {
@@ -45,6 +46,7 @@ module "cert_manager" {
       namespace_service_accounts = var.cert_manager_namespace
     }
   }
+  tags = local.tags
 }
 
 module "external_dns" {
@@ -62,12 +64,12 @@ module "external_dns" {
       namespace_service_accounts = var.external_dns_namespace
     }
   }
-
+  tags = local.tags
 }
 
 output "cert_manager" {
   value = module.cert_manager.iam_role_arn
-
+  
 }
 
 output "external_dns" {

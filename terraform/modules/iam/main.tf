@@ -20,13 +20,13 @@ resource "aws_iam_role" "eks_cluster" {
       Action    = "sts:AssumeRole"
     }]
   })
-
+  tags = local.tags
 }
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_AmazonEKSClusterPolicy" {
   role       = aws_iam_role.eks_cluster.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-
+  
 }
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_AmazonEKSVPCResourceController" {
@@ -45,7 +45,7 @@ resource "aws_iam_role" "eks_node" {
       Action    = "sts:AssumeRole"
     }]
   })
-
+  tags = local.tags
 }
 
 resource "aws_iam_role_policy_attachment" "node_AmazonEKSWorkerNodePolicy" {
