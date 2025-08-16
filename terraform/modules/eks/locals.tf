@@ -1,7 +1,7 @@
 locals {
   tags = {
     Project = "eks-project"
-    Owner = "Ayub"
-    Stack = "eks"
+    Owner   = "Ayub"
+    Stack   = "eks"
   }
 }

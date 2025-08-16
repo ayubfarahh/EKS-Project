@@ -14,7 +14,7 @@ resource "aws_security_group" "eks_cluster_sg" {
   name        = var.eks_cluster_sg_name
   description = var.eks_cluster_sg_desc
   vpc_id      = var.vpc_id
-  tags = local.tags
+  tags        = local.tags
 }
 
 resource "aws_security_group" "eks_nodes_sg" {
@@ -79,5 +79,5 @@ resource "aws_eks_node_group" "eks_nodes" {
   }
 
   depends_on = [aws_eks_cluster.eks_cluster]
-  tags = local.tags
+  tags       = local.tags
 }

@@ -11,12 +11,12 @@ terraform {
 
 resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr
-  tags = local.tags
+  tags       = local.tags
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
-  tags = local.tags
+  tags   = local.tags
 }
 
 resource "aws_subnet" "public_subnet1" {
@@ -24,7 +24,7 @@ resource "aws_subnet" "public_subnet1" {
   cidr_block              = var.public_subnet1_cidr
   availability_zone       = var.public_subnet1_az
   map_public_ip_on_launch = var.map_public_ip_on_launch
-  tags = local.tags
+  tags                    = local.tags
 
 }
 
@@ -33,7 +33,7 @@ resource "aws_subnet" "public_subnet2" {
   cidr_block              = var.public_subnet2_cidr
   availability_zone       = var.public_subnet2_az
   map_public_ip_on_launch = var.map_public_ip_on_launch
-  tags = local.tags
+  tags                    = local.tags
 
 }
 
@@ -41,7 +41,7 @@ resource "aws_subnet" "private_subnet1" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.private_subnet1_cidr
   availability_zone = var.private_subnet1_az
-  tags = local.tags
+  tags              = local.tags
 
 }
 
@@ -50,7 +50,7 @@ resource "aws_subnet" "private_subnet2" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.private_subnet2_cidr
   availability_zone = var.private_subnet2_az
-  tags = local.tags
+  tags              = local.tags
 }
 
 resource "aws_route_table" "public_route_table" {
@@ -77,14 +77,14 @@ resource "aws_route_table_association" "rta_pub2" {
 resource "aws_eip" "elastic_ip" {
   domain     = var.eip_domain
   depends_on = [aws_internet_gateway.igw]
-  tags = local.tags
+  tags       = local.tags
 }
 
 resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.elastic_ip.id
   subnet_id     = aws_subnet.public_subnet1.id
   depends_on    = [aws_eip.elastic_ip]
-  tags = local.tags
+  tags          = local.tags
 
 }
 
