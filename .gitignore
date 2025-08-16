@@ -101,3 +101,5 @@ terraform.rc
 *.tfstate
 *.tfstate.*
 !.terraform.lock.hcl
+terraform-doc.tar.gz
+.terraform.lock.hcl
