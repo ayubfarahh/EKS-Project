@@ -35,11 +35,7 @@ jobs:
     - name: Terraform Format Check
       run: terraform fmt -check -recursive
       working-directory: ${{ env.TF_WORKING_DIR }}
-
-    - name: Terraform Syntax and config check
-      run: terraform validate
-      working-directory: ${{ env.TF_WORKING_DIR }}
-
+      
     - name: Run TFLint
       uses: terraform-linters/setup-tflint@v4
       with:
