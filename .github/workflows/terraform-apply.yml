@@ -1,7 +1,7 @@
-name: Terraform Apply
+name: Terraform Apply 
 
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
 
 env:
   AWS_REGION: eu-west-2
@@ -9,7 +9,7 @@ env:
 
 jobs:
   apply-infra:
-    name: Apply Infrastructure (VPC, IAM, EKS)
+    name: Apply Infra (Networking, IAM, EKS)
     runs-on: ubuntu-latest
 
     steps:
@@ -28,16 +28,19 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Terraform Init 
+    - name: Terraform Init
       working-directory: terraform
       run: terraform init
 
-    - name: Terraform Apply 
+    - name: Terraform Apply (Infra Modules)
       working-directory: terraform
-      run: terraform apply -auto-approve
+      run: |
+        terraform apply -auto-approve -target=module.networking
+        terraform apply -auto-approve -target=module.iam
+        terraform apply -auto-approve -target=module.eks
 
   apply-helm:
-    name: Apply Helm Charts + IRSA
+    name: Apply Helm + IRSA
     runs-on: ubuntu-latest
     needs: apply-infra
 
@@ -57,10 +60,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Terraform Init (Helm)
+    - name: Terraform Init
       working-directory: terraform
       run: terraform init
 
-    - name: Terraform Apply (Helm)
-      working-directory: terraform/
-      run: terraform apply -auto-approve
+    - name: Terraform Apply (Helm + IRSA)
+      working-directory: terraform
+      run: |
+        terraform apply -auto-approve -target=module.irsa
+        terraform apply -auto-approve -target=module.helm
