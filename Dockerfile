@@ -3,8 +3,16 @@ WORKDIR /app
 COPY . .
 
 FROM nginx@sha256:d67ea0d64d518b1bb04acde3b00f722ac3e9764b3209a9b0a98924ba35e4b779
+
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+
+RUN chown -R appuser:appgroup /usr/share/nginx/html
+
 WORKDIR /usr/share/nginx/html
 COPY --from=builder /app ./
+
+
+USER appuser
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
