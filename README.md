@@ -42,3 +42,17 @@ helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
 ```
 kubectl apply -f kubernetes/apps/2048.yaml
 ```
+
+## Final Results
+
+### 2048 App
+![alt text!](/img/2048.png)
+
+### Argo CD
+![alt text!](/img/argo.png)
+
+### Grafana
+![alt text!](/img/p&g.png)
+
+### Workflows
+![alt text!](/img/workflow.png)
