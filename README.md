@@ -17,13 +17,15 @@ fsdf
 - Pre-commit hooks utilising the shift left approach
 
 ## Local App Setup
-Prerequisites
-Make sure you have the following installed:
+### Prerequisites
 
-Docker
-kubectl
-Kind or Minikube
-Helm
+#### Docker
+
+#### kubectl
+
+#### Kind or Minikube
+
+#### Helm
 
 
 Steps to Run Locally
