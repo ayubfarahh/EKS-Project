@@ -17,16 +17,6 @@ fsdf
 - Pre-commit hooks utilising the shift left approach
 
 ## Local App Setup
-### Prerequisites
-
-#### Docker
-
-#### kubectl
-
-#### Kind or Minikube
-
-#### Helm
-
 
 Steps to Run Locally
 ### 1. Clone the Repo
