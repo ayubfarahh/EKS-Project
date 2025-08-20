@@ -118,32 +118,6 @@ resource "helm_release" "argocd" {
 
   values = [file("${path.root}/kubernetes/argocd/values.yaml")]
 
-  set {
-    name  = "server.ingress.enabled"
-    value = "true"
-  }
-  set {
-    name  = "server.ingress.ingressClassName"
-    value = "nginx"
-  }
-  set {
-    name  = "server.ingress.hosts[0]"
-    value = "argocd.lab.ayubs.uk"
-  }
-  set {
-    name  = "server.ingress.tls[0].hosts[0]"
-    value = "argocd.lab.ayubs.uk"
-  }
-  set {
-    name  = "server.ingress.tls[0].secretName"
-    value = "argocd-tls"
-  }
-
-  set {
-    name  = "server.ingress.enabled"
-    value = "false"
-  }
-
 }
 
 
