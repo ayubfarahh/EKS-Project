@@ -34,7 +34,6 @@ cd EKS-Project
 ```
 
 ### 2. Start a Local Cluster
-Using Kind:
 ```
 kind create cluster --name local-eks
 ```
