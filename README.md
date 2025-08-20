@@ -27,28 +27,27 @@ Helm
 
 
 Steps to Run Locally
-1. Clone the Repo
+### 1. Clone the Repo
 ```
 git clone https://github.com/ayubfarahh/EKS-Project.git
 cd EKS-Project
 ```
 
-2. Start a Local Cluster
+### 2. Start a Local Cluster
 Using Kind:
 ```
 kind create cluster --name local-eks
 ```
 
-3. Install NGINX Ingress Controller
+### 3. Install NGINX Ingress Controller
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
-helm install ingress-nginx ingress-nginx/ingress-nginx \
-  --namespace ingress-nginx --create-namespace
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace
 ```
 
-4. Deploy the 2048 App
+### 4. Deploy the 2048 App
 ```
 kubectl apply -f kubernetes/apps/2048.yaml
 ```
